@@ -5,9 +5,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomepageComponent } from './pages/homepage/homepage.component';
+import { MovieDetailComponent } from './pages/movie-detail/movie-detail.component';
+import { ProfileDetailComponent } from './pages/profile-detail/profile-detail.component';
 
 @NgModule({
-  declarations: [AppComponent, HomepageComponent],
+  declarations: [AppComponent, HomepageComponent, MovieDetailComponent, ProfileDetailComponent] ,
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
