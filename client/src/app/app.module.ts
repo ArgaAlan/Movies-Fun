@@ -8,8 +8,8 @@ import { AppComponent } from './app.component';
 import { HomepageComponent } from './pages/homepage/homepage.component';
 import { MovieDetailComponent } from './pages/movie-detail/movie-detail.component';
 import { ProfileDetailComponent } from './pages/profile-detail/profile-detail.component';
-import { LoginComponent } from './login/login.component';
-import { SignUpComponent } from './sign-up/sign-up.component';
+import { LoginComponent } from './auth/login/login.component';
+import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 
 @NgModule({
