@@ -8,9 +8,10 @@ import { HomepageComponent } from './pages/homepage/homepage.component';
 import { MovieDetailComponent } from './pages/movie-detail/movie-detail.component';
 import { ProfileDetailComponent } from './pages/profile-detail/profile-detail.component';
 import { LoginComponent } from './login/login.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 @NgModule({
-  declarations: [AppComponent, HomepageComponent, MovieDetailComponent, ProfileDetailComponent, LoginComponent] ,
+  declarations: [AppComponent, HomepageComponent, MovieDetailComponent, ProfileDetailComponent, LoginComponent, SignUpComponent] ,
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
