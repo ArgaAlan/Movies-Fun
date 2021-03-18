@@ -17,6 +17,8 @@ export interface AuthResponseData {
   registered?: boolean;
 }
 
+const fakeUser = new User('jonsnow@gmail.com', '2', 'Jon', 'Snow', 'jonsnow', '12345678', new Date());
+
 @Injectable({
   providedIn: 'root',
 })
@@ -24,62 +26,21 @@ export class AuthService {
   user = new BehaviorSubject<User>(null);
   private tokenExpirationTimer: any;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) { }
 
   signup(email: string, password: string) {
-    // return this.http
-    //   .post<AuthResponseData>(
-    //     'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDQoi6foH1W4BEPDK45htGecSsM_JPs8zM',
-    //     {
-    //       email,
-    //       password,
-    //       returnSecureToken: true,
-    //     }
-    //   )
-    //   .pipe(
-    //     catchError(this.handleError),
-    //     tap((resData) => {
-    //       this.handleAuthentication(
-    //         resData.email,
-    //         resData.localId,
-    //         resData.idToken,
-    //         +resData.expiresIn
-    //       );
-    //     })
-    //   );
+    this.user.next(fakeUser);
+    this.router.navigate(['/homepage']);
   }
 
   signin(email: string, password: string) {
-    // return this.http
-    //   .post<AuthResponseData>(
-    //     'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDQoi6foH1W4BEPDK45htGecSsM_JPs8zM',
-    //     {
-    //       email,
-    //       password,
-    //       returnSecureToken: true,
-    //     }
-    //   )
-    //   .pipe(
-    //     catchError(this.handleError),
-    //     tap((resData) => {
-    //       this.handleAuthentication(
-    //         resData.email,
-    //         resData.localId,
-    //         resData.idToken,
-    //         +resData.expiresIn
-    //       );
-    //     })
-    //   );
+    this.user.next(fakeUser);
+    this.router.navigate(['/homepage']);
   }
 
   logout() {
-    // this.user.next(null);
-    // this.router.navigate(['/auth']);
-    // localStorage.removeItem('userData');
-    // if (this.tokenExpirationTimer) {
-    //   clearTimeout(this.tokenExpirationTimer);
-    // }
-    // this.tokenExpirationTimer = null;
+    this.user.next(null);
+    this.router.navigate(['/homepage']);
   }
 
   autoLogin() {
