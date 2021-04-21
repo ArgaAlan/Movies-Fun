@@ -17,6 +17,7 @@ export class SignUpComponent implements OnInit {
   signup() {
     this.authService.signup('', '');
     this.router.navigate(['/homepage']);
+    this.authService.signin('', '');
   }
 
 }

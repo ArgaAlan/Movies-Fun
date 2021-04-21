@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="user">
   <div class="team-single">
     <div class="row">
       <div class="col-lg-4 col-md-5 xs-margin-30px-bottom mt-3">
@@ -6,7 +6,7 @@
           <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="">
         </div>
         <div class="bg-light-gray padding-30px-all md-padding-25px-all sm-padding-20px-all text-center">
-          <h4 class="margin-10px-bottom font-size24 md-font-size22 sm-font-size20 font-weight-600">Username</h4>
+          <h4 class="margin-10px-bottom font-size24 md-font-size22 sm-font-size20 font-weight-600">{{ user.username }}</h4>
         </div>
       </div>
 
@@ -22,7 +22,7 @@
                     <strong class="margin-10px-left text-green"> Username:</strong>
                   </div>
                   <div class="col-md-7 col-7">
-                    <p>username</p>
+                    <p>{{ user.username }}</p>
                   </div>
                 </div>
 
@@ -35,7 +35,7 @@
                     <strong class="margin-10px-left xs-margin-four-left text-pink"> Email:</strong>
                   </div>
                   <div class="col-md-7 col-7">
-                    <p><a href="javascript:void(0)">addyour@emailhere</a></p>
+                    <p><a href="javascript:void(0)">{{ user.email }}</a></p>
                   </div>
                 </div>
               </li>
@@ -48,7 +48,7 @@
                     <strong class="margin-10px-left text-orange"> Password:</strong>
                   </div>
                   <div class="col-md-7 col-7">
-                    <p>password</p>
+                    <p>Change Password</p>
                   </div>
                 </div>
 
@@ -61,7 +61,7 @@
                     <strong class="margin-10px-left text-sky"> Name:</strong>
                   </div>
                   <div class="col-md-7 col-7">
-                    <p>name</p>
+                    <p>{{ user.name }}</p>
                   </div>
                 </div>
 
@@ -74,7 +74,7 @@
                     <strong class="margin-10px-left text-purple"> Surname:</strong>
                   </div>
                   <div class="col-md-7 col-7">
-                    <p>name</p>
+                    <p>{{ user.surname }}</p>
                   </div>
                 </div>
 
@@ -86,7 +86,7 @@
       </div>
 
       <div class="col-md-12">
-        <button class="btn btn-warning">Log Out</button>
+        <button class="btn btn-secondary btn-block" (click)="logout()">Logout</button>
       </div>
     </div>
   </div>

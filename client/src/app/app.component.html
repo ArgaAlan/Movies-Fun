@@ -1,6 +1,6 @@
 <nav class="navbar" style="background-color: #000000">
   <div class="container-fluid">
-    <a class="navbar-brand">
+    <a class="navbar-brand" [routerLink]="isAuthenticated ? ['/homepage'] : []">
       <img
         src="/assets/mnf-logo-circle.svg"
         width="150"
