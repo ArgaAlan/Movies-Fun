@@ -11,6 +11,7 @@ import { ProfileDetailComponent } from './pages/profile-detail/profile-detail.co
 import { LoginComponent } from './auth/login/login.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     SignUpComponent,
     SpinnerComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, NgbModule],
   providers: [],
   bootstrap: [AppComponent],
 })

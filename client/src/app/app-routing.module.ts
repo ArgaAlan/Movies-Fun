@@ -7,7 +7,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 
 const routes: Routes = [
-  { path: 'movie/:id', component: MovieDetailComponent },
+  { path: ':type/:id', component: MovieDetailComponent },
   { path: 'sign-in', component: LoginComponent },
   { path: 'sign-up', component: SignUpComponent },
   { path: 'homepage', component: HomepageComponent },
