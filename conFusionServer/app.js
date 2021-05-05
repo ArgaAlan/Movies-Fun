@@ -11,6 +11,7 @@ var config = require('./config');
 
 var indexRouter = require('./routes/index');
 var usuariosRouter = require('./routes/users');
+var movieDetails = require('./routes/movieDetails');
 
 const mongoose = require('mongoose');
 
@@ -47,6 +48,7 @@ app.use(passport.initialize());
 
 app.use('/', indexRouter);
 app.use('/users', usuariosRouter)
+app.use('/movieDetails', movieDetails);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
