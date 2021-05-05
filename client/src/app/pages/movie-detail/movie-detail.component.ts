@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Movie } from 'src/app/models/movie.model';
+import { Movie, MovieShowResult } from 'src/app/models/movie.model';
 import { TraktService } from 'src/app/services/trakt.service';
 
 @Component({
@@ -11,15 +11,25 @@ import { TraktService } from 'src/app/services/trakt.service';
 export class MovieDetailComponent implements OnInit {
   loading = true;
   movie: Movie;
+  type: string;
+  slug: string;
+  relatedMovies: MovieShowResult[] = [];
+
   constructor(private route: ActivatedRoute, private trakt: TraktService) {}
 
   ngOnInit(): void {
-    const slug = this.route.snapshot.params['id'];
-    const type = this.route.snapshot.params['type'];
-    this.trakt.getMovieDetails(type, slug).subscribe((movie: Movie) => {
-      this.movie = movie;
-      console.log('this movie', this.movie);
-      this.loading = false;
+    this.route.params.subscribe(({type, id}) => {
+      this.type = type;
+      this.slug = id;
+      this.trakt.getMovieDetails(this.type, this.slug).subscribe((movie: Movie) => {
+        this.movie = movie;
+        this.movie.updated_at = new Date(this.movie.updated_at);
+        console.log('this movie', this.movie);
+        this.loading = false;
+      });
+      this.trakt.getRelatedMovies(type, this.slug).subscribe((relatedMovies) => {
+        this.relatedMovies = relatedMovies;
+      });
     });
   }
 }

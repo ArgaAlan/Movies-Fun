@@ -10,9 +10,6 @@
             placeholder="Type the movie/show of your interest"
             aria-label="Search"
             aria-describedby="search-addon"
-            [ngbTypeahead]="search"
-            [resultTemplate]="rt"
-    	      [inputFormatter]="formatter"
             [(ngModel)]="searchEntry"
             name="search"
             autocomplete="off"
@@ -26,7 +23,7 @@
     </form>
   </div>
   <br />
-  <div class="row align-items-center">
+  <!-- <div class="row align-items-center">
     <div class="col">
       <div class="form-check form-switch">
         <input
@@ -90,7 +87,7 @@
         >
       </div>
     </div>
-  </div>
+  </div> -->
   <br />
   <div class="row align-items-center">
     <div class="col" *ngIf="submitted">
@@ -104,6 +101,11 @@
         >
           <li class="list-group-item" aria-current="true">
             {{ movie.title }}
+            <span *ngIf="movie.year"> ({{ movie.year }})</span>
+            <span
+              class="badge badge-pill badge-primary ml-2"
+              [ngStyle]="{'background-color': movie.type === 'movie' ? 'var(--gray)' : 'var(--info)' }">{{ movie.type }}
+            </span>
           </li>
         </a>
       </ul>
@@ -111,12 +113,3 @@
     </div>
   </div>
 </div>
-
-<ng-template #rt let-r="result" let-t="term">
-  <ngb-highlight [result]="r.title" [term]="t"></ngb-highlight>
-  <span *ngIf="r.year"> ({{ r.year }})</span>
-  <span
-    class="badge badge-pill badge-primary ml-2"
-    [ngStyle]="{'background-color': r.type === 'movie' ? 'var(--gray)' : 'var(--info)' }">{{ r.type }}
-  </span>
-</ng-template>

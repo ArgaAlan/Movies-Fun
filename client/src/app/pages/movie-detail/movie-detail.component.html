@@ -28,7 +28,7 @@
         <p><b>First aired:</b> {{ movie.first_aired }}</p>
         <p><b>Votes:</b> {{ movie.votes }}</p>
         <p><b>Comment Count:</b> {{ movie.comment_count }}</p>
-        <p><b>Updated at:</b> {{ movie.updated_at }}</p>
+        <p><b>Updated at:</b> {{ movie.updated_at.toDateString() }}</p>
         <p><b>Language:</b> {{ movie.language }}</p>
         <p><b>Available translations:</b> {{ movie.available_translations }}</p>
       </div>
@@ -37,11 +37,26 @@
     <!-- / column -->
 
     <div class="col-md-7">
-      <img
-        [src]="'https://image.tmdb.org/t/p/original' + movie.imageUrl"
-        alt="project-image"
-        class="rounded"
-      />
+      <div class="row">
+        <img
+          [src]="'https://image.tmdb.org/t/p/original' + movie.imageUrl"
+          alt="project-image"
+          class="rounded"
+        />
+      </div>
+      <div class="row flex-column mt-2">
+        <h2>We recommend:</h2>
+        <div class="list-group">
+          <a *ngFor="let movie of relatedMovies" [routerLink]="['/' + type, movie.ids.slug]" class="list-group-item list-group-item-action">
+            {{ movie.title }}
+            <span *ngIf="movie.year"> ({{ movie.year }})</span>
+            <span
+              class="badge badge-pill badge-primary ml-2"
+              [ngStyle]="{'background-color': type === 'movie' ? 'var(--gray)' : 'var(--info)' }">{{ type }}
+            </span>
+          </a>
+        </div>
+      </div>
     </div>
     <!-- / column -->
   </div>
