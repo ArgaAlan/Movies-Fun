@@ -29,6 +29,12 @@ interface MovieImagesResult {
 export class TraktService {
   constructor(private http: HttpClient, private tmdb: TMDBService) {}
 
+  /**
+   * Fetch details of a movie
+   * @param type search a movie or a show
+   * @param slug slug id of the movie/show of interest
+   * @returns Observable of movie details
+   */
   public getMovieDetails(type: 'movie' | 'show', slug: string): Observable<Movie> {
     return this.http
       .get<Movie>(`https://api.trakt.tv/${type}s/${slug}`, {
@@ -49,6 +55,12 @@ export class TraktService {
       );
   }
 
+  /**
+   * Find a list related movies
+   * @param type movie or show
+   * @param idSlug slug id of the movie/show
+   * @returns An array of movies or shows resulting from the related call
+   */
   public getRelatedMovies(type: string, idSlug: string): Observable<MovieShowResult[]> {
     return this.http.get<MovieShowResult[]>(
       `https://api.trakt.tv/${type}s/${idSlug}/related`,
@@ -58,6 +70,11 @@ export class TraktService {
     );
   }
 
+  /**
+   * Find all movies and shows containing the query text in their title
+   * @param query a string containing the query text
+   * @returns An observable of an array of movies or shows
+   */
   public query(query: string): Observable<QueryMovieShowResult[]> {
     return this.http.get<QueryMovieShowResult[]>(
       `https://api.trakt.tv/search/movie,show?query=${query}`,
