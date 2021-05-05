@@ -7,7 +7,7 @@
           <input
             type="search"
             class="form-control rounded"
-            placeholder="Movie"
+            placeholder="Type the movie/show of your interest"
             aria-label="Search"
             aria-describedby="search-addon"
             [ngbTypeahead]="search"
@@ -16,6 +16,7 @@
             [(ngModel)]="searchEntry"
             name="search"
             autocomplete="off"
+            style="width: 350px;"
           />
           <button type="submit" class="btn btn-outline-primary">
             Search Movie
@@ -93,6 +94,7 @@
   <br />
   <div class="row align-items-center">
     <div class="col" *ngIf="submitted">
+      <p class="h3">Results: </p>
       <app-spinner *ngIf="loading"></app-spinner>
       <ul class="list-group" *ngIf="!loading && relatedMovies.length >= 1">
         <a
