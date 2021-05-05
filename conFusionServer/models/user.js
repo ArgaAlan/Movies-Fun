@@ -7,25 +7,21 @@ var User = new Schema({
         type: String,
         required: true
     },
-    name: {
-        type: String,
-        default: ''
-    },
-    surname: {
-        type: String,
-        default: ''
-    },
     email: {
         type: String,
-        required: true
+        default: ''
+    },
+    firstname: {
+        type: String,
+        default: ''
+    },
+    lastname: {
+        type: String,
+        default: ''
     },
     avatarUrl: {
         type: String,
         default: ''
-    },
-    password: {
-        type: String,
-        required: true
     },
     admin: {
         type: Boolean,
