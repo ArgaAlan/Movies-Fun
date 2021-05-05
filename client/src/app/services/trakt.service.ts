@@ -35,7 +35,7 @@ export class TraktService {
    * @param slug slug id of the movie/show of interest
    * @returns Observable of movie details
    */
-  public getMovieDetails(type: 'movie' | 'show', slug: string): Observable<Movie> {
+  public getMovieDetails(type: string, slug: string): Observable<Movie> {
     return this.http
       .get<Movie>(`https://api.trakt.tv/${type}s/${slug}`, {
         headers,
@@ -58,12 +58,12 @@ export class TraktService {
   /**
    * Find a list related movies
    * @param type movie or show
-   * @param idSlug slug id of the movie/show
+   * @param slug slug id of the movie/show
    * @returns An array of movies or shows resulting from the related call
    */
-  public getRelatedMovies(type: string, idSlug: string): Observable<MovieShowResult[]> {
+  public getRelatedMovies(type: string, slug: string): Observable<MovieShowResult[]> {
     return this.http.get<MovieShowResult[]>(
-      `https://api.trakt.tv/${type}s/${idSlug}/related`,
+      `https://api.trakt.tv/${type}s/${slug}/related`,
       {
         headers,
       }
