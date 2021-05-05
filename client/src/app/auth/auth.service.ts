@@ -18,7 +18,7 @@ export interface AuthResponseData {
 }
 
 
-const fakeUser = new User('jonsnow@gmail.com', '2', 'Jon', 'Snow', 'jonsnow', '12345678', new Date());
+const fakeUser = null;
 
 @Injectable({
   providedIn: 'root',
@@ -29,12 +29,29 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  signup(email: string, password: string) {
-    this.user.next(fakeUser);
-    this.router.navigate(['/homepage']);
+  signup(username: string, password: string) {
+    // this.http.post(`http://localhost:3443/users/signup`, {
+    //   username,
+    //   password
+    // }).subscribe(console.log);
+    // this.user.next(fakeUser);
+    // this.router.navigate(['/homepage']);
+
+    return this.http
+      .post<AuthResponseData>(
+        'http://movies-and-fun-backend.herokuapp.com/',
+        {
+          username,
+          password,
+        }
+      )
+      .pipe(
+        catchError(this.handleError),
+        tap(console.log)
+      );
   }
 
-  signin(email: string, password: string) {
+  signin(username: string, password: string) {
     this.user.next(fakeUser);
     this.router.navigate(['/homepage']);
   }
@@ -48,12 +65,26 @@ export class AuthService {
 
   autoLogout(expirationDuration: number) {}
 
-  private handleAuthentication(
-    email: string,
-    userId: string,
-    token: string,
-    expiresIn: number
-  ) {}
+  // private handleAuthentication(
+  //   email: string,
+  //   userId: string,
+  //   token: string,
+  //   expiresIn: number
+  // ) {
+  //   const user = new User(email, userId, token, expirationDate);
+  //   this.user.next(user);
+  //   localStorage.setItem('userData', JSON.stringify(user));
+  // }
 
-  private handleError(errorRes: HttpErrorResponse) {}
+  private handleError(errorRes: HttpErrorResponse) {
+    let errorMessage = 'An unknown error occurred!';
+    console.log('error', errorRes);
+    if (!errorRes.error?.error) {
+      return throwError(errorMessage);
+    }
+    switch (errorRes.error.error.message) {
+
+    }
+    return throwError(errorMessage);
+  }
 }

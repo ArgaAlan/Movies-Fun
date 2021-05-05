@@ -4,6 +4,7 @@ import { of } from 'rxjs';
 import { tap, catchError, map } from 'rxjs/operators';
 
 import { MovieShowResult, QueryMovieShowResult } from 'src/app/models/movie.model';
+import { HerokuService } from 'src/app/services/heroku.service';
 import { TraktService } from 'src/app/services/trakt.service';
 
 @Component({
@@ -18,7 +19,7 @@ export class HomepageComponent implements OnInit {
   submitted = false;
   selectedMovie: any = null;
   relatedMovies: MovieShowResult[] = [];
-  constructor(private trakt: TraktService) {}
+  constructor(private trakt: TraktService, private heroku: HerokuService) {}
 
   ngOnInit(): void {}
 
@@ -38,5 +39,9 @@ export class HomepageComponent implements OnInit {
           this.relatedMovies = data;
         });
     this.submitted = true;
+  }
+
+  fetchBackendHome() {
+    this.heroku.fetchHome().subscribe(window.alert);
   }
 }

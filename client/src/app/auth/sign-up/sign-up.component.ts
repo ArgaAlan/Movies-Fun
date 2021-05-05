@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
@@ -8,6 +9,8 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent implements OnInit {
+  isLoading = false;
+  error = null;
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -15,9 +18,35 @@ export class SignUpComponent implements OnInit {
   }
 
   signup() {
-    this.authService.signup('', '');
-    this.router.navigate(['/homepage']);
-    this.authService.signin('', '');
+
+  }
+
+  onSubmit(form: NgForm) {
+    if (!form.valid) {
+      return;
+    }
+    this.isLoading = true;
+    const email = form.value.email;
+    const password = form.value.password;
+
+
+    const auth$ = this.authService.signup(email, password);
+
+
+    auth$.subscribe(
+      (resData) => {
+        console.log('data: ', resData);
+        this.isLoading = false;
+        this.router.navigate(['/homepage']);
+      },
+      (errorMessage) => {
+        console.log('errorMessage', errorMessage);
+        this.error = errorMessage;
+        this.isLoading = false;
+      }
+    );
+
+    form.reset();
   }
 
 }
