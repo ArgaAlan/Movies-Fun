@@ -1,7 +1,8 @@
-export interface MovieResult {
+export interface MovieShowResult {
   ids: { trakt: number; slug: string; imdb: string; tmdb: number };
   title: string;
   year: number;
+  type?: 'movie' | 'show';
 }
 
 export interface Movie {
@@ -32,4 +33,14 @@ export interface IDS {
   slug: string;
   imdb: string;
   tmdb: number;
+}
+
+export interface QueryResult {
+  type: string;
+  score: number;
+}
+
+export interface QueryMovieShowResult extends QueryResult {
+  movie?: MovieShowResult
+  show?: MovieShowResult
 }

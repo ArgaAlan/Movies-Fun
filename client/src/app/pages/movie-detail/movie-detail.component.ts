@@ -15,7 +15,8 @@ export class MovieDetailComponent implements OnInit {
 
   ngOnInit(): void {
     const slug = this.route.snapshot.params['id'];
-    this.trakt.getMovieDetails(slug).subscribe((movie: Movie) => {
+    const type = this.route.snapshot.params['type'];
+    this.trakt.getMovieDetails(type, slug).subscribe((movie: Movie) => {
       this.movie = movie;
       console.log('this movie', this.movie);
       this.loading = false;
