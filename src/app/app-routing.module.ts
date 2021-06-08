@@ -3,15 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { MovieDetailComponent } from './pages/movie-detail/movie-detail.component';
 import { HomepageComponent } from './pages/homepage/homepage.component';
 import { ProfileDetailComponent } from './pages/profile-detail/profile-detail.component';
-import { LoginComponent } from './auth/login/login.component';
-import { SignUpComponent } from './auth/sign-up/sign-up.component';
+import { AuthGuard } from '@auth0/auth0-angular'
 
 const routes: Routes = [
-  { path: ':type/:id', component: MovieDetailComponent },
-  { path: 'sign-in', component: LoginComponent },
-  { path: 'sign-up', component: SignUpComponent },
-  { path: 'homepage', component: HomepageComponent },
-  { path: 'profile', component: ProfileDetailComponent },
+  { path: ':type/:id', component: MovieDetailComponent, canActivate: [AuthGuard] },
+  { path: 'homepage', component: HomepageComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: ProfileDetailComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: 'homepage', pathMatch: 'full' },
 ];
 

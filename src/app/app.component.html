@@ -1,6 +1,6 @@
 <nav class="navbar" style="background-color: #000000">
   <div class="container-fluid">
-    <a class="navbar-brand" [routerLink]="isAuthenticated ? ['/homepage'] : []">
+    <a class="navbar-brand" [routerLink]="(auth.isAuthenticated$ | async) ? ['/homepage'] : []">
       <img
         src="/assets/mnf-logo-circle.svg"
         width="150"
@@ -13,12 +13,26 @@
     <a
       class="navbar-brand"
       style="color: #23b5b5; font-size: 2em"
-      [routerLink]="isAuthenticated ? ['/profile'] : ['/sign-in']"
-      ><i class="far fa-user"></i
-      ><span class="ml-2" style="font-size: 24px">{{
-        isAuthenticated ? "Profile" : "Log In"
-      }}</span></a
+      *ngIf="(auth.isAuthenticated$ | async)"
+      (click)="goToProfile()"
     >
+      <i class="far fa-user"></i>
+      <span
+        class="ml-2" style="font-size: 24px">Profile
+      </span>
+    </a>
+
+    <a
+      class="navbar-brand"
+      style="color: #23b5b5; font-size: 2em"
+      *ngIf="!(auth.isAuthenticated$ | async)"
+      (click)="loginWithRedirect()"
+    >
+      <i class="far fa-user"></i>
+      <span
+        class="ml-2" style="font-size: 24px">Log In
+      </span>
+    </a>
   </div>
 </nav>
 <router-outlet></router-outlet>
