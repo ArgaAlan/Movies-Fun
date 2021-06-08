@@ -13,6 +13,9 @@ import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+// Import the module from the SDK
+import { AuthModule } from '@auth0/auth0-angular';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +26,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SignUpComponent,
     SpinnerComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, NgbModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, // Import the module into the application, with configuration
+    AuthModule.forRoot({
+      domain: 'dev-e8nvli2n.us.auth0.com',
+      clientId: 'xjxaMzITgZJzvV0yN6tOggP6IHgGT76B',
+      cacheLocation: 'localstorage',
+      useRefreshTokens: true
+    })],
   providers: [],
   bootstrap: [AppComponent],
 })

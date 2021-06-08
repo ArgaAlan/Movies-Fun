@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { AuthService } from 'src/app/auth/auth.service';
-import { User } from 'src/app/auth/user.model';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-profile-detail',
@@ -9,23 +8,21 @@ import { User } from 'src/app/auth/user.model';
   styleUrls: ['./profile-detail.component.scss']
 })
 export class ProfileDetailComponent implements OnInit, OnDestroy {
-  user: User;
-  userSub: Subscription;
 
-  constructor(private authService: AuthService) { }
+  constructor(public auth: AuthService) { }
 
   ngOnInit(): void {
-    this.userSub = this.authService.user.subscribe((user) => {
-      this.user = user;
-    });
+
   }
 
+  // tslint:disable-next-line:typedef
   logout() {
-    this.authService.logout();
+    this.auth.logout();
   }
 
+  // tslint:disable-next-line:typedef
   ngOnDestroy() {
-    this.userSub.unsubscribe();
+
   }
 
 }
