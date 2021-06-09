@@ -35,12 +35,10 @@ export class SignUpComponent implements OnInit {
 
     auth$.subscribe(
       (resData) => {
-        console.log('data: ', resData);
         this.isLoading = false;
         this.router.navigate(['/homepage']);
       },
       (errorMessage) => {
-        console.log('errorMessage', errorMessage);
         this.error = errorMessage;
         this.isLoading = false;
       }

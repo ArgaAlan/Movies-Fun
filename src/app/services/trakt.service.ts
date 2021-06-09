@@ -56,6 +56,15 @@ export class TraktService {
   }
 
   /**
+   * Fetch movie by tmdbId
+   * @returns Observable of movie
+   */
+  public findMovieByIMDB(tmdbId: string): Observable<MovieShowResult> {
+    return this.http
+      .get<MovieShowResult>(`https://api.trakt.tv/search/tmdb/${tmdbId}?type=movie`, { headers })
+  }
+
+  /**
    * Find a list related movies
    * @param type movie or show
    * @param slug slug id of the movie/show

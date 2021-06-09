@@ -1,8 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { Router } from '@angular/router';
-// import { AuthService } from './auth/auth.service';
+import { RecommenderService } from './services/recommender.service';
 
 
 @Component({
@@ -10,11 +9,9 @@ import { Router } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit, OnDestroy {
-  // isAuthenticated = false;
-  userSub: Subscription;
+export class AppComponent implements OnInit {
 
-  constructor(public auth: AuthService, private router: Router) { }
+  constructor(public auth: AuthService, private router: Router, private recommender: RecommenderService) { }
 
   // tslint:disable-next-line:typedef
   loginWithRedirect(){
@@ -26,15 +23,6 @@ export class AppComponent implements OnInit, OnDestroy {
     this.router.navigate(['/profile']).then(r => {});
   }
 
-  // constructor(private authService: AuthService) { }
-
   ngOnInit() {
-    /*this.userSub = this.authService.user.subscribe((user) => {
-      this.isAuthenticated = !!user;
-    });*/
-  }
-
-  ngOnDestroy() {
-    this.userSub.unsubscribe();
   }
 }
