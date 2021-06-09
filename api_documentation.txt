@@ -1,0 +1,64 @@
+# API Documentation
+Movies-N-Fun operates with three connected API's
+
+## Recommender System
+
+`URL`: http://localhost:3200
+`Headers`: None
+
+- For a user, get a single movie recommendation based on its ratings. 
+
+- Input of the form
+
+### Get a random movie recommendation based on your ratings
+
+[POST] http://localhost:3200/<userId>
+
+Body should contain all ratings organized in key-value pairs where key is imdbId of the movie and value the rating
+
+{
+    "<imdbId1>": <rating1>,
+    "<imdbId2>": <rating2>,
+    "<imdbId3>": <rating3>,
+    ...
+}
+
+#### Example:
+ 
+{
+    "22267": 3.5,
+    "1": 5
+    "114": 4.5
+}
+
+#### Should get a response of the form:
+
+{
+    "imdbId": <imdbId>
+}
+
+You should use the other API's listed here to obtain details about the movie
+
+## Trakt API
+URL: https://api.trakt.tv/
+clientId: '4085dc60d019ec4b6d1c59562e6a25ffdba71fd796b2a86f430356066ac95475',
+clientSecret: '58515b6a2b07147dd223b98a18084d9e40691c883f4bc9ed15726c7aa5450aac'
+
+You must put the following to use the API
+URL headers = {
+
+  "trakt-api-key": <clientId>,
+  "trakt-api-version": 2
+}
+
+tmdbToken: (v4)
+URL: https://api.themoviedb.org/3/
+'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhYThjYmVjOWJiMmE3NDllZTA5ZGRkMDBhZjYwNThkNCIsInN1YiI6IjYwNTI1ZmU3MTEzMGJkMDA2YTQ1NmJlZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.v9L1JxBS8NF_bHRgp62JhupVcAr08lHjd5Q2Gc-hiZk',
+
+URL headers = {
+  "Authorization": "Bearer <tmdbToken>"
+}
+
+Example:
+https://api.themoviedb.org/3/<type>/<imdb>
+https://api.themoviedb.org/3/movie/22267

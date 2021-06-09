@@ -24,7 +24,6 @@ export class MovieDetailComponent implements OnInit {
       this.trakt.getMovieDetails(this.type, this.slug).subscribe((movie: Movie) => {
         this.movie = movie;
         this.movie.updated_at = new Date(this.movie.updated_at);
-        console.log('this movie', this.movie);
         this.loading = false;
       });
       this.trakt.getRelatedMovies(type, this.slug).subscribe((relatedMovies) => {
