@@ -15,6 +15,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // Import the module from the SDK
 import { AuthModule } from '@auth0/auth0-angular';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,12 @@ import { AuthModule } from '@auth0/auth0-angular';
       clientId: 'xjxaMzITgZJzvV0yN6tOggP6IHgGT76B',
       cacheLocation: 'localstorage',
       useRefreshTokens: true
-    })],
+    }), ServiceWorkerModule.register('ngsw-worker.js', {
+  enabled: environment.production,
+  // Register the ServiceWorker as soon as the app is stable
+  // or after 30 seconds (whichever comes first).
+  registrationStrategy: 'registerWhenStable:30000'
+})],
   providers: [],
   bootstrap: [AppComponent],
 })
