@@ -31,7 +31,7 @@ export class HomepageComponent implements OnInit {
     this.movieOfTheDay$ = this.auth.user$.pipe(
       switchMap(
         (user) =>
-          this.recommender.sendRecommendation(user.preferred_username, {
+          this.recommender.sendRecommendation(user.nickname, {
             "88": 5,
             "79": 3.5,
             "101": 2,

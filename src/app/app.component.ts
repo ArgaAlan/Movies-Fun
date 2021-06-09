@@ -12,7 +12,6 @@ import { RecommenderService } from './services/recommender.service';
 })
 export class AppComponent implements OnInit {
   // isAuthenticated = false;
-  userSub: Subscription;
   public readonly VAPID_PUBLIC_KEY = 'BAS8vsVukbdt3lOp-9UR2F4Mp_8B5a6QxJYT3qYYz1pBe9DWu3LJW8EM_PGantX6yDyRwJ53UbX_1J8JCGXxS-A';
 
   constructor(public auth: AuthService, private router: Router, private swPush: SwPush, private recommender: RecommenderService) {
@@ -37,7 +36,7 @@ export class AppComponent implements OnInit {
   goToProfile(){
     this.router.navigate(['/profile']).then(r => {});
   }
-  
+
   ngOnInit() {
   }
 }
