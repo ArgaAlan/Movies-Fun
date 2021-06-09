@@ -1,9 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { Router } from '@angular/router';
 import {SwPush} from '@angular/service-worker';
-// import { AuthService } from './auth/auth.service';
+import { RecommenderService } from './services/recommender.service';
 
 
 @Component({
@@ -16,7 +15,7 @@ export class AppComponent implements OnInit {
   userSub: Subscription;
   public readonly VAPID_PUBLIC_KEY = 'BAS8vsVukbdt3lOp-9UR2F4Mp_8B5a6QxJYT3qYYz1pBe9DWu3LJW8EM_PGantX6yDyRwJ53UbX_1J8JCGXxS-A';
 
-  constructor(public auth: AuthService, private router: Router, private swPush: SwPush) {
+  constructor(public auth: AuthService, private router: Router, private swPush: SwPush, private recommender: RecommenderService) {
     this.subscribeToNotifications();
   }
 
@@ -38,12 +37,7 @@ export class AppComponent implements OnInit {
   goToProfile(){
     this.router.navigate(['/profile']).then(r => {});
   }
-
-  // constructor(private authService: AuthService) { }
-  ngOnInit(): void {
-    /*this.userSub = this.authService.user.subscribe((user) => {
-      this.isAuthenticated = !!user;
-    });*/
-    this.subscribeToNotifications();
+  
+  ngOnInit() {
   }
 }

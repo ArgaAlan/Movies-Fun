@@ -19,6 +19,6 @@ export class TMDBService {
   getImageUrl(type: 'movie' | 'tv', imdb: string) {
     return this.http
       .get(`https://api.themoviedb.org/3/${type}/${imdb}/images`, { headers })
-      .pipe(tap(console.log));
+      .pipe();
   }
 }

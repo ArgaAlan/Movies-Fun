@@ -1,5 +1,18 @@
 <div class="container p-3">
   <h1>Movies & Fun - Find Related Movies!</h1>
+  <p>Fun site to discover new movies and tv shows! Just enter the name of a title, select the movie to navigate to the specific page and you will get similar movies!</p>
+  <div *ngIf="movie" class="flex-column">
+    <h4>Hello {{ user.given_name }}, <span class="text-muted">we recommend you to watch today:</span></h4>
+    <a
+      [routerLink]="['/movie', movie.ids.slug]"
+      style="text-decoration: none"
+      class="col-6"
+    >
+      <div class="alert alert-primary" role="alert">
+        {{ movie.title }} ({{ movie.year }})
+      </div>
+    </a>
+  </div>
   <div class="row align-items-center mt-5">
     <form (ngSubmit)="onSubmit(searchForm)" #searchForm="ngForm">
       <div class="col">
@@ -17,9 +30,6 @@
           />
           <button type="submit" class="btn btn-outline-primary">
             Search Movie
-          </button>
-          <button type="button" (click)="fetchBackendHome()" class="btn btn-outline-primary">
-            Backend Connection
           </button>
         </div>
       </div>
